@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Button, H3, Input, Text, SizeTokens, TextArea, XStack, YStack, Form, Spinner, Label} from 'tamagui';
+import { View, StyleSheet, ScrollView } from 'react-native';
+import { Button, H3, Input, Text, SizeTokens, TextArea, XStack, YStack, Form, Spinner, Label, Spacer, Separator} from 'tamagui';
 import { Search, GraduationCap } from 'lucide-react-native';
 import { useForm, Controller } from "react-hook-form";
 import axios from 'axios';
@@ -58,6 +58,7 @@ export function HomeScreen() {
     <View 
     style={styles.wrapper}
     >
+      <ScrollView>
       <YStack
       marginBottom={'$4'}
       alignItems='center'>
@@ -114,11 +115,31 @@ export function HomeScreen() {
         </YStack>
       </Form>
       {loading && <Spinner size="large" color="#8af21a"/>}
-      <YStack>
+      <YStack
+      width={350}
+      >
         {itens.map((item: any, index: number) => (
-              <Text>{item.name}</Text>                        
+          <YStack
+          backgroundColor={'#ccff96'}
+          borderRadius={'$5'}
+          borderColor={'#a4f74a'}
+          borderWidth={'2'}
+          marginLeft={'$3'}
+          marginRight={'$3'}
+          marginBottom={'$2'}
+          padding="$2"
+          width={350}>
+            <Text fontSize={'$5'} fontWeight={'800'}>{item.name}</Text>   
+            <Separator marginVertical={7} borderColor={'#a4f74a'}/>
+            <XStack>
+              <Text>{item.alpha_two_code}</Text>  
+              <Separator alignSelf="stretch" vertical marginHorizontal={5}  borderColor={'#a4f74a'}/>
+              <Text>{item.country}</Text>  
+            </XStack>  
+          </YStack>                     
         ))}
       </YStack>
+      </ScrollView>
     </View>
   )
 }
